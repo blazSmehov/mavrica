@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>EKSPERIMENTI</title>
+  <meta name="description" content="Oblak" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  
+  <link rel="icon" type="image/png" href="/static/favicon.png" />
+  <link rel="stylesheet" type="text/css" href="/static/style.css" />
+</head>
+<body>
+  <div class="header">
+    <p><a href="/eksperimenti">Eksperimenti</a></p>
+    <h1>{{ data[1] }}</h1>
+    <p>{{ data }}</p>
+    <p>{{ conf }}</p>
+  </div>
+  
+  <div class="section">
+  <p>S klikom na gumb Start zaženete eskperiment. Stop prekine pošiljanje podatkov iz simulatorja na strežnik.</p>
+  <form id="form1" action="/eksperiment/{{ data[0] }}" method="post" accept-charset="utf-8" autocomplete="on">
+    <p class="submit">
+    <span><button type="submit" name="action" value="start" {{ start_disabled }}>Start</button></span>
+  </p>
+    <p class="submit">
+    <span><button type="submit" name="action" value="stop" {{ stop_disabled }}>Stop</button></span>
+  </p>
+  </form>
+  <h2>Konfiguracija</h2>
+
+  <p>Prosim vpišite spremenljivke, ki so značilne za meritev.</p>
+
+  <form id="form2" action="/eksperiment/{{ data[0] }}" method="post" accept-charset="utf-8" autocomplete="on"> 
+  
+    <div>
+      <label for="visinaStojala">Višina stojala [cm]</label>
+      <input type="number" name="visinaStojala" id="visinaStojala" min="1" max="2" required>
+    </div>
+    <div>
+      <label for="pretok">Pretok[l/s oz. dm^3/s]</label>
+      <input type="number" name="pretok" id="pretok" required>
+    </div>
+    <div>
+      Lokacija dežemera ->
+      Izberite eno od naslednjih možnosti:
+      <div>
+        <label for="center">C (Center)</label>
+        
+      </div>
+      <div>
+      <p>
+        
+      </p>
+      </div>
+      <p>
+        <label for="lokacijaTip">Tip lokacije</label>
+        <span><select name="lokacijaTip" id="lokacijaTip">
+          <option value="C">Center</option>
+          <option value="X">X-os</option>
+          <option value="Y">Y-os</option>
+        </select></span>
+      </p>
+      <p>
+        <label for="lokacijaVrednost">Vrednost lokacije</label>
+        <span><input type="number" name="lokacijaVrednost" id="lokacijaVrednost" value="0"></span>
+      </p>      
+    </div>
+      <div>
+          <label for="izvajalec">Izvajalec/ka meritev [ime in priimek]</label>
+          <input type="text" name="izvajalec" id="izvajalec" required>
+      </div>
+
+      <div>
+          <label for="komentar">Komentar [neobvezno, do 60 znakov]</label>
+          <textarea id="komentar" name="komentar"></textarea>
+      </div>
+      <p class="submit">
+        <span><button type="submit" name="action" value="save">Shrani</button></span></p>
+    </form>
+  </div>
+</body>
+</html>
